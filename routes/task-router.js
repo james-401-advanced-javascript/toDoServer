@@ -71,13 +71,10 @@ router.patch('/mark-undone/:t_id', auth, async (req, res, next) => {
 });
 
 router.get('/priority/:level', auth, async (req, res, next) => {
-  console.log('USER: ', req.user);
-  console.log('PRIORITY LVL: ', req.params.level);
   let taskList = [];
 
   for (let i = 0; i < req.user.tasks.length; i++) {
     let task = await tasks.read(req.user.tasks[i]);
-    console.log('TASK: ',task.priority);
     if (Number(task.priority) === Number(req.params.level)) {
       taskList.push(task);
     }
